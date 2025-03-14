@@ -6,9 +6,9 @@ import (
 	"net/http"
 )
 
-func StartBotHandler(ctx *gin.Context, discordToken string) {
+func StartBotHandler(ctx *gin.Context, token string) {
 	if !bot.StatusBot() {
-		err := bot.StartBot(discordToken)
+		err := bot.StartBot(token)
 		if err != nil {
 			ctx.JSON(http.StatusInternalServerError, gin.H{"error": "Falha ao ligar o bot"})
 			return
