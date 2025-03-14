@@ -1,14 +1,13 @@
 package router
 
 import (
-	"github.com/bwmarrin/discordgo"
 	"github.com/gin-gonic/gin"
 )
 
-func InitializeRouter(discordSession *discordgo.Session) {
+func InitializeRouter(discordToken string) {
 	router := gin.Default()
 
-	initializeRoutes(router, discordSession)
+	initializeRoutes(router, discordToken)
 
 	err := router.Run(":8080")
 	if err != nil {
