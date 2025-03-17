@@ -2,21 +2,29 @@ package main
 
 import (
 	"github.com/V1c-G4b/discord_bot_go/bot"
+	"github.com/V1c-G4b/discord_bot_go/config"
 	"github.com/V1c-G4b/discord_bot_go/router"
+	"github.com/joho/godotenv"
 	"log"
 	"os"
 	"os/signal"
 	"syscall"
-
-	"github.com/bwmarrin/discordgo"
-	"github.com/joho/godotenv"
 )
 
 var (
-	discordSession *discordgo.Session
+	logger *config.Logger
 )
 
 func main() {
+
+	logger = config.GetLogger("main")
+
+	err := config.Init()
+	if err != nil {
+		logger.Errorf("Error initializing config: %v", err)
+		return
+	}
+
 	if err := godotenv.Load(); err != nil {
 		log.Println("Nenhum arquivo .env encontrado")
 	}
